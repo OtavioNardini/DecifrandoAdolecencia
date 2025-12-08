@@ -42,7 +42,7 @@ const observer = new IntersectionObserver(function (entries) {
 
 // Adiciona animação aos cards
 document.addEventListener('DOMContentLoaded', function () {
-    const cards = document.querySelectorAll('.phase-card, .guarantee-item, .testimonial-card');
+    const cards = document.querySelectorAll('.phase-card, .guarantee-item, .testimonial-card, .target-audience');
 
     cards.forEach(card => {
         card.style.opacity = '0';
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Animações da seção problema
 document.addEventListener('DOMContentLoaded', function () {
     const problemSection = document.querySelector('.problem-section');
-    
+
     if (problemSection) {
         const problemObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -97,23 +97,23 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (title) {
                         title.classList.add('animate');
                     }
-                    
+
                     // Anima os elementos em sequência
                     setTimeout(() => {
                         const intro = problemSection.querySelector('.problem-intro');
                         if (intro) intro.classList.add('animate');
                     }, 200);
-                    
+
                     setTimeout(() => {
                         const text = problemSection.querySelector('.problem-text');
                         if (text) text.classList.add('animate');
                     }, 400);
-                    
+
                     setTimeout(() => {
                         const highlight = problemSection.querySelector('.problem-highlight');
                         if (highlight) highlight.classList.add('animate');
                     }, 600);
-                    
+
                     // Anima os problem-items em cascata
                     setTimeout(() => {
                         const items = problemSection.querySelectorAll('.problem-item');
@@ -121,13 +121,13 @@ document.addEventListener('DOMContentLoaded', function () {
                             item.classList.add('animate');
                         });
                     }, 800);
-                    
+
                     // Anima a conclusão
                     setTimeout(() => {
                         const conclusion = problemSection.querySelector('.problem-conclusion');
                         if (conclusion) conclusion.classList.add('animate');
                     }, 1800);
-                    
+
                     // Para de observar após animar
                     problemObserver.unobserve(entry.target);
                 }
@@ -135,7 +135,35 @@ document.addEventListener('DOMContentLoaded', function () {
         }, {
             threshold: 0.2 // Ativa quando 20% da seção estiver visível
         });
-        
+
         problemObserver.observe(problemSection);
+    }
+});
+
+// Animação da lista de benefícios
+document.addEventListener('DOMContentLoaded', function () {
+    const benefitsList = document.querySelector('.benefits-list');
+
+    if (benefitsList) {
+        const benefitsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const items = benefitsList.querySelectorAll('li');
+
+                    // Anima cada item com um delay crescente
+                    items.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.classList.add('animate');
+                        }, index * 200); // 200ms de intervalo entre cada item
+                    });
+
+                    benefitsObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.2
+        });
+
+        benefitsObserver.observe(benefitsList);
     }
 });

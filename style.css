@@ -9,7 +9,8 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #333;
-    background-color: #f5f5f5;
+    background-color: #ffffff;
+    /* Branco puro para integração perfeita com o fade */
 }
 
 .container {
@@ -18,27 +19,43 @@ body {
     padding: 0 20px;
 }
 
-/* Cabeçalho */
+/* Cabeçalho com fade suave */
 .header {
     background: linear-gradient(135deg, #0199c8 0%, #ff8490 100%);
     color: white;
-    padding: 30px 0;
+    padding: 40px 0 100px 0;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+/* Gradiente de fade para branco */
+.header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 0.3) 30%,
+            rgba(255, 255, 255, 0.7) 70%,
+            rgba(255, 255, 255, 1));
+    pointer-events: none;
 }
 
 .header-title {
     font-size: 1.8rem;
     font-weight: 700;
+    position: relative;
+    z-index: 1;
 }
 
 /* Seção Hero */
 .hero {
     background-color: white;
-    padding: 60px 0;
+    padding: 40px 0 60px 0;
     position: relative;
-    overflow: hidden;
-    z-index: 0;
 }
 
 
@@ -116,43 +133,61 @@ body {
 
 /* Lista de benefícios */
 .benefits-list {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     list-style: none;
     max-width: 700px;
     margin: 40px auto;
-    padding-left: 20px;
+    padding: 0;
 }
 
 .benefits-list li {
-    margin: 15px 0;
-    font-size: 1.05rem;
+    width: fit-content;
+    margin: 10px 0;
+    font-size: 1.1rem;
     color: #555;
-    position: relative;
-    padding-left: 30px;
+    text-align: left;
+
+    /* Estado inicial da animação */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.benefits-list li.animate {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .benefits-list li::before {
     content: "✓";
-    position: absolute;
-    left: 0;
     color: #15c801;
     font-weight: bold;
     font-size: 1.3rem;
+    margin-right: 12px;
+    flex-shrink: 0;
 }
 
 /* Botão CTA */
 .cta-button {
-    display: block;
+    display: flex;
+    justify-content: center;
     margin: 40px auto;
     padding: 18px 50px;
     font-size: 1.3rem;
     font-weight: bold;
     background: linear-gradient(135deg, #fbb501 0%, #f7de20 100%);
-    color: #333;
+    color: #000000;
     border: none;
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 6px 20px rgba(251, 181, 1, 0.4);
+    text-align: center;
+    text-decoration: none;
+    width: fit-content;
 }
 
 .cta-button:hover {
@@ -162,7 +197,7 @@ body {
 
 .cta-button.large {
     font-size: 1.5rem;
-    padding: 22px 60px;
+    padding: 22px 20px;
 }
 
 /* Seção de Garantias */
@@ -601,32 +636,103 @@ body {
 
 /* Storytelling Section */
 .storytelling {
-    background-color: #f8f9fa;
-    padding: 60px 0;
+    background: linear-gradient(180deg, #ffffff 0%, #f0f4f8 100%);
+    padding: 80px 0;
+    position: relative;
 }
 
 .story-content {
-    max-width: 800px;
-    margin: 40px auto 0;
+    max-width: 750px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.85);
+    /* Fundo translúcido para ver a imagem atrás */
+    backdrop-filter: blur(10px);
+    /* Efeito de vidro fosco */
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 1;
+    /* Garante que o texto fique sobre a imagem de fundo */
+}
+
+/* Elemento decorativo no topo do card */
+.story-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #0199c8, #ff8490);
+    border-radius: 0 0 10px 10px;
+}
+
+.storytelling .section-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 40px;
+    line-height: 1.3;
+    text-align: center;
+}
+
+.storytelling .section-title img {
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
 }
 
 .story-text {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #555;
-    margin-bottom: 20px;
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: #4a5568;
+    margin-bottom: 25px;
+    text-align: justify;
+}
+
+.story-subtext {
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1.9;
+    color: #4a5568;
+    margin-bottom: 25px;
+    text-align: center;
 }
 
 .story-highlight {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #0199c8;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #2c3e50;
     text-align: center;
-    margin: 30px 0;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    margin: 40px -20px;
+    /* Quebra levemente as margens laterais */
+    padding: 40px;
+    background: linear-gradient(135deg, rgba(1, 153, 200, 0.05) 0%, rgba(255, 132, 144, 0.05) 100%);
+    border-radius: 15px;
+    border-left: 5px solid #0199c8;
+    border-right: 5px solid #ff8490;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s ease;
+}
+
+.story-highlight:hover {
+    transform: scale(1.02);
+}
+
+/* Aspas decorativas */
+.story-highlight::before {
+    content: '"';
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    font-size: 6rem;
+    color: rgba(1, 153, 200, 0.1);
+    font-family: serif;
+    line-height: 1;
 }
 
 .story-finale {
@@ -708,7 +814,8 @@ body {
 /* Solution Section */
 .solution-section {
     background-color: white;
-    padding: 30px 0;
+    padding: 60px 0;
+    position: relative;
 }
 
 .solution-intro {
@@ -722,43 +829,71 @@ body {
 .target-audience {
     background: linear-gradient(135deg, #0199c8 0%, #ff8490 100%);
     color: white;
-    padding: 30px;
-    border-radius: 15px;
-    max-width: 600px;
-    margin: 30px auto;
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 650px;
+    margin: 40px auto;
     text-align: center;
+    box-shadow: 0 10px 30px rgba(1, 153, 200, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.target-audience:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(1, 153, 200, 0.3);
 }
 
 .target-audience p {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 15px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .target-audience ul {
     list-style: none;
     padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
 }
 
 .target-audience li {
     font-size: 1.1rem;
-    margin: 10px 0;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 50px;
+    backdrop-filter: blur(5px);
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+.target-audience li:hover {
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .solution-promise {
     text-align: center;
-    font-size: 1.2rem;
-    max-width: 750px;
-    margin: 30px auto;
+    font-size: 1.4rem;
+    max-width: 800px;
+    margin: 50px auto 30px;
     color: #2c3e50;
+    line-height: 1.6;
+    padding: 0 20px;
+}
+
+.solution-promise strong {
+    color: #0199c8;
 }
 
 .solution-finale {
     text-align: center;
-    font-size: 1.1rem;
-    font-style: italic;
-    color: #666;
-    margin-top: 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ff8490;
+    margin-top: 30px;
+    letter-spacing: 0.5px;
 }
 
 /* Content Section */
@@ -1218,6 +1353,30 @@ body {
     height: 396px;
 }
 
+.wp-image-2809612 {
+    /* 1. Posicionamento Flutuante Centralizado */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* Centraliza exato e aplica a rotação */
+    transform: translate(-50%, -50%) rotate(10deg);
+
+    /* 2. Camada e Opacidade */
+    z-index: 0;
+    /* Fica atrás do texto (que deve ter z-index maior) */
+    opacity: 0.15;
+    /* Bem suave para não atrapalhar a leitura */
+
+    /* 3. Tamanho Grande */
+    width: 1000px;
+    height: auto;
+    /* Mantém a proporção */
+    max-width: 90vw;
+    /* Não estoura a tela em mobile */
+    pointer-events: none;
+    /* Não atrapalha cliques */
+}
+
 /* Responsividade para a imagem flutuante */
 @media (max-width: 768px) {
 
@@ -1226,10 +1385,186 @@ body {
         display: none;
     }
 }
+
 /* Ajuste para o iframe do YouTube ficar responsivo */
 .video-container iframe {
     width: 100%;
     height: 100%;
     aspect-ratio: 16/9;
     border: none;
+}
+
+.solution-section {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.solution-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(135deg, rgba(255, 107, 150, 0.1), rgba(0, 176, 217, 0.1));
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.solution-intro {
+    font-size: 1.3rem;
+    text-align: center;
+    margin-bottom: 50px;
+    color: #555;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.solution-intro strong {
+    color: #00b0d9;
+    font-weight: 700;
+}
+
+.target-audience-card {
+    background: linear-gradient(135deg, #00b0d9 0%, #0099c2 100%);
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 20px 60px rgba(0, 176, 217, 0.3);
+    margin-bottom: 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.target-audience-card::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.card-header h3 {
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 35px;
+    font-weight: 600;
+}
+
+.audience-item {
+
+    margin-top: 30px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px 20px;
+    border-radius: 15px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.audience-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.audience-item .emoji {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.audience-item .text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    display: block;
+}
+
+.promise-box {
+    background: linear-gradient(135deg, #ff6b96 0%, #ff4d7d 100%);
+    padding: 40px;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    box-shadow: 0 20px 60px rgba(255, 107, 150, 0.3);
+    position: relative;
+}
+
+.promise-box::after {
+    content: '🛡️';
+    position: absolute;
+    bottom: -20px;
+    right: 30px;
+    font-size: 5rem;
+    opacity: 0.3;
+}
+
+.solution-promise {
+    font-size: 1.35rem;
+    text-align: center;
+    color: white;
+    line-height: 1.8;
+    margin: 0;
+}
+
+.solution-promise strong {
+    color: #ffd93d;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.solution-finale {
+    font-size: 1.25rem;
+    text-align: center;
+    color: #2c3e50;
+    font-weight: 600;
+    padding: 30px;
+    background: rgba(0, 176, 217, 0.05);
+    border-radius: 15px;
+    border-left: 5px solid #00b0d9;
+}
+
+.solution-finale strong {
+    color: #ff6b96;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .solution-intro {
+        font-size: 1.1rem;
+    }
+
+    .target-audience-card {
+        padding: 30px 20px;
+    }
+
+    .card-header h3 {
+        font-size: 1.3rem;
+    }
+
+    .audience-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .promise-box {
+        padding: 30px 20px;
+    }
+
+    .solution-promise {
+        font-size: 1.15rem;
+    }
+
+    .solution-finale {
+        font-size: 1.1rem;
+    }
 }
