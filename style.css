@@ -53,7 +53,7 @@ body {
 
 /* Logo responsiva no header */
 .header img {
-    max-width: 100%;
+    max-width: 25%;
     height: auto;
     width: clamp(250px, 50vw, 500px);
     display: block;
@@ -943,7 +943,7 @@ body {
 .problem-highlight {
     font-size: 1.4rem;
     font-weight: 700;
-    color: #ff8490;
+    color: #000000;
     margin: 30px 0;
     padding: 25px;
     background: white;
@@ -2133,12 +2133,12 @@ body {
 .about-hero-banner {
     position: relative;
     width: 100%;
-    max-width: 450px;
+    max-width: 600px;
     /* Largura de Story no Desktop */
     margin: 60px auto;
     aspect-ratio: 9 / 16;
     /* Formato Story Vertical */
-    background-image: url('../img/medicas.jpg');
+    background-image: url('../img/doutoras.png');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
