@@ -1371,12 +1371,14 @@ body {
 
 .doctors-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin: 40px 0;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    grid-template-columns: 1fr 1fr;
+    /* Duas colunas iguais */
+    gap: 40px;
+    max-width: 1000px;
+    /* Largura controlada */
+    margin: 40px auto;
+    /* Centralizado na tela */
+    width: 100%;
 }
 
 .doctor-card {
@@ -1385,7 +1387,19 @@ body {
     border-radius: 15px;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    /* Removemos flex, min-width e max-width para o card ocupar toda sua coluna */
+    width: 100%;
 }
+
+/* Responsividade: vira uma coluna em telas menores */
+@media (max-width: 768px) {
+    .doctors-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+    }
+}
+
+
 
 .doctor-icon {
     font-size: 4rem;
@@ -1400,6 +1414,90 @@ body {
 
 .doctor-card p {
     color: #666;
+}
+
+/* Novos estilos para o currículo das doutoras */
+.doctor-profile-header {
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.doctor-specialty {
+    font-weight: 700;
+    color: #2c3e50;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.rqe-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.rqe-badge {
+    display: inline-block;
+    background-color: #e3f2fd;
+    color: #0199c8;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border: 1px solid #b3e5fc;
+}
+
+.doctor-curriculum-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.doctor-curriculum-list li {
+    margin-bottom: 12px;
+    font-size: 1rem;
+    color: #555;
+    position: relative;
+    padding-left: 20px;
+    line-height: 1.5;
+}
+
+.doctor-curriculum-list li::before {
+    content: "•";
+    color: #0199c8;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    font-size: 1.2rem;
+    line-height: 1.2;
+}
+
+.doctor-social {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    font-weight: 600;
+    color: #0199c8;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.doctor-social span {
+    background: #f8f9fa;
+    padding: 8px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.doctor-social span:hover {
+    background: #0199c8;
+    color: white;
 }
 
 .about-mission,
@@ -2166,7 +2264,7 @@ body {
     /* Gradiente Story: Escuro nas pontas, Transparente no meio */
     background: linear-gradient(180deg,
             rgba(0, 0, 0, 0.85) 0%,
-            rgba(0, 0, 0, 0.5) 15%,
+            rgba(0, 0, 0, 0) 15%,
             rgba(0, 0, 0, 0) 25%,
             rgba(0, 0, 0, 0) 75%,
             rgba(0, 0, 0, 0.6) 85%,
