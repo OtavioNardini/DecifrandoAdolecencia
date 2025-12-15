@@ -214,7 +214,7 @@ body {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     list-style: none;
     max-width: 700px;
     margin: 40px auto;
@@ -222,6 +222,7 @@ body {
 }
 
 .benefits-list li {
+    font-weight: 800;
     width: fit-content;
     margin: 10px 0;
     font-size: 1.1rem;
@@ -240,10 +241,15 @@ body {
 }
 
 .benefits-list li::before {
-    content: "✓";
-    color: #15c801;
-    font-weight: bold;
-    font-size: 1.3rem;
+    content: "";
+    background-image: url('img/ICONE.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    vertical-align: middle;
     margin-right: 12px;
     flex-shrink: 0;
 }
@@ -2128,17 +2134,14 @@ body {
     pointer-events: none;
 }
 
-/* Banner Hero com Imagem de Fundo Estilo Card */
 /* Banner Hero com Imagem de Fundo Estilo Story (Vertical sempre) */
 .about-hero-banner {
     position: relative;
     width: 100%;
     max-width: 600px;
-    /* Largura de Story no Desktop */
     margin: 60px auto;
     aspect-ratio: 9 / 16;
-    /* Formato Story Vertical */
-    background-image: url('../img/doutoras.png');
+    background-image: url('img/doutoras.png');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
